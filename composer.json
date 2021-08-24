@@ -1,0 +1,29 @@
+{
+	"name": "oboynitro/flexy-orm",
+	"description": "tiny flexible database wrapper api for PHP-PDO",
+	"type": "library",
+	"keywords": [
+		"orm",
+		"mysql",
+		"database",
+		"php",
+		"pdo"
+	],
+	"license": "MIT",
+	"minimum-stability": "dev",
+	"authors": [
+		{
+			"name": "Frank Owusu Boakye",
+			"email": "oboy.nitro1@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Oboynitro\\FlezyORM\\": "src/"
+		}
+	},
+	"require": {
+		"ext-pdo": "*",
+		"php": ">=7.4"
+	}
+}
