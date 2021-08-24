@@ -144,7 +144,7 @@ class FlezyORM
         try {
             $stmt = static::$connection->prepare($query);
             $stmt->execute();
-            $this->data = $stmt->rowCount() ? $stmt->fetchObject() : [];
+            $this->data = $stmt->fetchObject();
             return $this->data;
         }catch (PDOException $e) {
             die("Internal Server Error, please contract the site administrator or try again");
@@ -181,7 +181,7 @@ class FlezyORM
         try {
             $stmt = static::$connection->prepare($query);
             $stmt->execute();
-            $this->data = $stmt->rowCount() ? $stmt->fetch() : [];
+            $this->data = $stmt->fetch();
             return $this->data;
         }catch (PDOException $e) {
             die("Internal Server Error, please contract the site administrator or try again");
@@ -201,7 +201,7 @@ class FlezyORM
         try {
             $stmt = static::$connection->prepare($query);
             $stmt->execute();
-            $this->data = $stmt->rowCount() ? $stmt->fetch() : [];
+            $this->data = $stmt->fetch();
             return $this->data;
         }catch (PDOException $e) {
             die("Internal Server Error, please contract the site administrator or try again");
@@ -268,7 +268,7 @@ class FlezyORM
         try {
             $stmt = static::$connection->prepare($query);
             $stmt->execute();
-            $this->data = $stmt->rowCount() ? $stmt->fetch() : [];
+            $this->data = $stmt->fetch();
             return $this->data;
         }catch (PDOException $e) {
             die("Internal Server Error, please contract the site administrator or try again");
