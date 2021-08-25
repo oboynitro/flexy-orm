@@ -17,10 +17,6 @@ class FlezyORM
     private string $table;
 
 
-    /** @var object data object returned from queries */
-    private object $data;
-
-
     /** @var string selection string for queries */
     private string $selectClause;
 
@@ -135,17 +131,16 @@ class FlezyORM
      * Fetch all data (multiple)
      *
      * @access public
-     * @return object
+     * @return object|array
      */
-    public function all(): object
+    public function all()
     {
         $this->selectClause = "*";
         $query = $this->buildQuery();
         try {
             $stmt = static::$connection->prepare($query);
             $stmt->execute();
-            $this->data = $stmt->fetchObject();
-            return $this->data;
+            return $stmt->fetchAll(PDO::FETCH_OBJ);
         }catch (PDOException $e) {
             die("Internal Server Error, please contract the site administrator or try again");
         }
@@ -171,9 +166,9 @@ class FlezyORM
      * Counts all rows in table
      *
      * @access public
-     * @return object
+     * @return object|null
      */
-    public function count(): object
+    public function count(): ?object
     {
         $countDataName = $this->table . '_count';
         $this->selectClause = "COUNT(*) as $countDataName";
@@ -181,8 +176,7 @@ class FlezyORM
         try {
             $stmt = static::$connection->prepare($query);
             $stmt->execute();
-            $this->data = $stmt->fetch();
-            return $this->data;
+            return $stmt->rowCount() ? $stmt->fetchObject() : null;
         }catch (PDOException $e) {
             die("Internal Server Error, please contract the site administrator or try again");
         }
@@ -193,16 +187,15 @@ class FlezyORM
      * Fetch all data (multiple)
      *
      * @access public
-     * @return object
+     * @return object|null
      */
-    public function get(): object
+    public function get(): ?object
     {
         $query = $this->buildQuery();
         try {
             $stmt = static::$connection->prepare($query);
             $stmt->execute();
-            $this->data = $stmt->fetch();
-            return $this->data;
+            return $stmt->rowCount() ? $stmt->fetchObject() : null;
         }catch (PDOException $e) {
             die("Internal Server Error, please contract the site administrator or try again");
         }
@@ -259,17 +252,16 @@ class FlezyORM
      *
      * @access public
      * @param int $primary_key defaults to 'id' column
-     * @return object
+     * @return object|null
      */
-    public function find(int $primary_key): object
+    public function find(int $primary_key): ?object
     {
         $this->whereClause = "WHERE id = '$primary_key'";
         $query = $this->buildQuery();
         try {
             $stmt = static::$connection->prepare($query);
             $stmt->execute();
-            $this->data = $stmt->fetch();
-            return $this->data;
+            return $stmt->rowCount() ? $stmt->fetchObject() : null;
         }catch (PDOException $e) {
             die("Internal Server Error, please contract the site administrator or try again");
         }
