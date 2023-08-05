@@ -1,5 +1,6 @@
 {
 	"name": "oboynitro/flexy-orm",
+	"version": "1",
 	"description": "tiny flexible database wrapper api for PHP-PDO",
 	"type": "library",
 	"keywords": [
